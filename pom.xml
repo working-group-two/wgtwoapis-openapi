@@ -21,9 +21,9 @@
     </modules>
 
     <scm>
-      <connection>scm:git:git@github.com:working-group-two/wgtwoapis.git</connection>
-      <developerConnection>scm:git:git@github.com:working-group-two/wgtwoapis.git</developerConnection>
-      <url>https://github.com/working-group-two/wgtwoapis.git</url>
+      <connection>scm:git:git@github.com:working-group-two/wgtwoapis-openapi.git</connection>
+      <developerConnection>scm:git:git@github.com:working-group-two/wgtwoapis-openapi.git</developerConnection>
+      <url>https://github.com/working-group-two/wgtwoapis-openapi.git</url>
       <tag>HEAD</tag>
     </scm>
 
