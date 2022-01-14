@@ -1014,12 +1014,41 @@ components:
           $ref: '#/components/schemas/ServiceNamesV2'
         config:
           type: object
-          required:
-            - active
+          description: |
+            An optional object to configure a service.
+            The properties supplied depend on the service being configured.
+            Previous config is modified by supplying a new config object that will overwrite the previous config.
+            Previous config is removed by not supplying config.
           properties:
             active:
               type: boolean
-              description: Use this field to set the provisioned state of a supplementary service.
+              description: |
+                Use this field to control the state of a supplementary service.
+                Active = true means it is provisioned and active
+                Active = false means it is provisioned but inactive
+            speed_bps:
+              type: number
+              description: |
+                Configure service DATA to throttle the download speed in bits per second.
+                When the field is absent, the APN settings determine the maximum speed.
+            forbidden_content:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentCategories'
+              description: |
+                Configure service DATA_CONTENT_FILTERING by supplying a list of forbidden content.
+            unconditional:
+              type: string
+              description: Configure service VOICE_CALLFOWARD with the msisdn for unconditional forwarding.
+            busy:
+              type: string
+              description: Configure service VOICE_CALLFOWARD with the msisdn for forwarding when callee is busy.
+            no_reply:
+              type: string
+              description: Configure service VOICE_CALLFOWARD with the msisdn for forwarding when callee does not answer.
+            unreachable:
+              type: string
+              description: Configure service VOICE_CALLFOWARD with the msisdn for forwarding when callee is not reachable.
     UpdateSubscriptionRequestV2:
       type: object
       required:
@@ -1048,6 +1077,27 @@ components:
                 properties:
                   servicename:
                     $ref: '#/components/schemas/ServiceNamesV2'
+    ContentCategories:
+      type: string
+      enum:
+        - PORN
+        - KID-SAFE
+        - SOCIAL-MEDIA
+        - VIOLENCE
+        - TORRENTS
+        - DRUGS
+        - GAMBLING
+        - GAMES
+        - DATING
+        - MEDIA
+        - ALCOHOL-AND-TOBACCO
+        - NUDITY
+        - OBSCENE-AND-TASTELESS
+        - FASHION-AND-BEAUTY
+        - HOMEWORK
+        - SEARCH-ENGINES-AND-PORTALS
+        - SEX-EDUCATION
+        - HATE-AND-SELF-HARM
     ServiceNamesV2:
       type: string
       description: |
