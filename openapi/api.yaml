@@ -464,8 +464,6 @@ paths:
                 - bssid
                 - iccid
                 - msisdn
-                - roamingprofile
-                - apnprofile
               properties:
                 bssid:
                   type: string
@@ -610,22 +608,18 @@ paths:
             schema:
               type: object
               required:
-                - msisdn
+                - iccid
+                - newIccid
               properties:
-                userid:
+                bssid:
                   type: string
-                  description: This is an optional field from v2
+                iccid:
+                  type: string
                 newIccid:
                   type: string
-                oldIccid:
-                  type: string
-                msisdn:
-                  type: string
             example:
-              oldIccid: "2420198416000015720"
+              iccid: "2420198416000015720"
               newIccid: "2420198412148748973"
-              msisdn: "46737678218"
-              userid: "abcdefghijklm"
       responses:
         '201':
           description: successful operation
@@ -690,20 +684,19 @@ paths:
             schema:
               type: object
               required:
-                - msisdn
                 - newMsisdn
               properties:
-                userid:
+                bssid:
                   type: string
-                  description: This is an optional field from v2
                 msisdn:
                   type: string
                 newMsisdn:
                   type: string
                 iccid:
                   type: string
+                imsi:
+                  type: string
             example:
-              iccid: "2420198416000015720"
               msisdn: "46737678218"
               newMsisdn: "46737678200"
 
@@ -732,8 +725,6 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - bssid
               properties:
                 bssid:
                   type: string
@@ -1061,7 +1052,6 @@ components:
     UpdateSubscriptionRequestV2:
       type: object
       required:
-        - bssid
         - msisdn
       properties:
         bssid:
@@ -1084,7 +1074,7 @@ components:
             delete:
               type: array
               items:
-                $ref: '#/components/schemas/ServiceObject'
+                $ref: '#/components/schemas/ServiceNamesV2'
     ContentCategories:
       type: string
       enum:
