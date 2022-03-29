@@ -374,6 +374,17 @@ paths:
                     action: ADD
                   msisdn: 4799990000
                   userid: my-user-id
+              product-bundling:
+                value:
+                  bssid: "operator_name"
+                  service:
+                    name: PRODUCT_BUNDLING
+                    action: ADD
+                    config:
+                      products:
+                        - "product_id"
+                  msisdn: 4799990000
+                  userid: my-user-id
       responses:
         '201':
           description: successful operation
@@ -462,6 +473,7 @@ paths:
               type: object
               required:
                 - bssid
+                - userid
                 - iccid
                 - msisdn
               properties:
@@ -469,7 +481,6 @@ paths:
                   type: string
                 userid:
                   type: string
-                  description: This is an optional field from v2
                 iccid:
                   type: string
                 msisdn:
@@ -501,6 +512,10 @@ paths:
                   - servicename: "VOICE_CALLER_ID_PRESENTATION"
                     config:
                       active: true
+                  - servicename: "PRODUCT_BUNDLING"
+                    config:
+                      products:
+                        - "product_id"
       responses:
         '201':
           description: successful operation
@@ -541,7 +556,7 @@ paths:
                   - servicename: "SMS_OUT_INTER_ROAM"
                   - servicename: "VOICE_PREMIUM_INFO"
                 delete:
-                  - servicename: "VOICE_VOLTE"
+                  - "VOICE_VOLTE"
       responses:
         '201':
           description: successful operation
@@ -601,6 +616,9 @@ paths:
       tags:
         - Subscription Profile v2 (Under development)
       summary: Change SIM
+      description: |
+        Changing the SIM for a user. Only an unassigned ICCID can be provided as the new ICCID to this call.
+        If the new ICCID that is provided is used by another user then this call will fail with invalid input error.
       operationId: change.sim.v2
       requestBody:
         content:
@@ -863,6 +881,7 @@ components:
                 - DATA_TETHERING
                 - MMS_IN
                 - MMS_OUT
+                - PRODUCT_BUNDLING
                 - ROAMING
                 - ROAMING_DATA
                 - SMS_IN
@@ -1026,11 +1045,51 @@ components:
                 Use this field to control the state of a supplementary service.
                 Active = true means it is provisioned and active
                 Active = false means it is provisioned but inactive
+
+                This field will be updated when a user toggles the state of the corresponding supplementary
+                service from the handset. If this field is provided when updating a provisioned service,
+                the state of the supplementary service will be updated both on the handset and to the
+                network.
+
+                Omitting this field when provisioning a new supplementary service sets it to false
+                by default. Omitting this field when updating a provisioned service leaves it unchanged.
+
+                VOICE_CALLWAITING:
+                  service absent: call waiting is not available
+                  active = true:  call waiting is active on the device
+                  active = false: call waiting is not currently active on the device, but can be made active
+
+                VOICE_CALLER_ID_RESTRICTION:
+                  service absent: caller id always presented
+                  active = true:  caller id never presented
+                  active = false: caller id can be hidden for selected calls
+
+                USER_CS_BLOCK_OUT:
+                  service absent: user cannot block all outgoing voice/sms on device (BAIC)
+                  active = true:  user is blocking all outgoing voice/sms on device (BAIC)
+                  active = false: user is not blocking all outgoing voice/sms on device (BAIC), but can be made active
+
+                USER_CS_BLOCK_IN:
+                  service absent: user cannot block all incoming voice/sms on device (BAOC)
+                  active = true:  user is blocking all incoming voice/sms on device (BAOC)
+                  active = false: user is not blocking incoming voice/sms on device (BAOC), but can be made active
+
+                USER_CS_BLOCK_OUT_INTER:
+                  service absent: user cannot block all outgoing international voice/sms on device (BOIC)
+                  active = true:  user is blocking all outgoing international voice/sms on device (BOIC)
+                  active = false: user is not blocking outgoing international voice/sms on device (BOIC), but can be made active
+
+                USER_CS_BLOCK_OUT_INTER_EXC_HOME:
+                  service absent: user cannot block all outgoing international except home voice/sms on device (BOIC-exHc)
+                  active = true:  user is blocking all outgoing international except home voice/sms on device (BOIC-exHc)
+                  active = false: user is not blocking outgoing international except home voice/sms on device (BOIC-exHc), but can be made active
             speed_bps:
               type: number
               description: |
                 Configure service DATA to throttle the download speed in bits per second.
-                When the field is absent, the APN settings determine the maximum speed.
+                When the field is absent, or not configured globally for your tenant, the APN settings determine the maximum speed.
+
+                Contact us for more information to configure it globally.
             forbidden_content:
               type: array
               items:
@@ -1079,8 +1138,8 @@ components:
       type: string
       enum:
         - PORN
-        - KID-SAFE
-        - SOCIAL-MEDIA
+        - KID_SAFE
+        - SOCIAL_MEDIA
         - VIOLENCE
         - TORRENTS
         - DRUGS
@@ -1088,31 +1147,19 @@ components:
         - GAMES
         - DATING
         - MEDIA
-        - ALCOHOL-AND-TOBACCO
+        - ALCOHOL_AND_TOBACCO
         - NUDITY
-        - OBSCENE-AND-TASTELESS
-        - FASHION-AND-BEAUTY
+        - OBSCENE_AND_TASTELESS
+        - FASHION_AND_BEAUTY
         - HOMEWORK
-        - SEARCH-ENGINES-AND-PORTALS
-        - SEX-EDUCATION
-        - HATE-AND-SELF-HARM
+        - SEARCH_ENGINES_AND_PORTALS
+        - SEX_EDUCATION
+        - HATE_AND_SELF_HARM
     ServiceNamesV2:
       type: string
       description: |
         Each service SERVICE_NAME_ROAM depends on the basic services SERVICE_NAME and ROAMING. For example, to make international calls
         while abroad you need to have all 3 services, ROAMING, VOICE_OUT_INTER and VOICE_OUT_INTER_ROAM.
-
-        VOICE_CALLWAITING service absent - call waiting is not available
-
-        VOICE_CALLWAITING(active = true) - call waiting is active on the device
-
-        VOICE_CALLWAITING(active = false) - call waiting is not currently active on the device, but can be made active
-
-        VOICE_CALLER_ID_RESTRICTION service absent - caller id always presented
-
-        VOICE_CALLER_ID_RESTRICTION(active = true) - caller id never presented
-
-        VOICE_CALLER_ID_RESTRICTION(active = false) - caller id can be hidden for selected calls
 
         All data services depend on also having the DATA service. It takes an optional unsigned integer-valued parameter, 'speed_bps' (bits per second), to allow throttling
         of data speed for all data sessions. If not specified, the QoS settings from the configured APN are used.
@@ -1132,6 +1179,7 @@ components:
         - MMS_OUT_ROAM
         - MMS_OUT_INTER
         - MMS_OUT_INTER_ROAM
+        - PRODUCT_BUNDLING
         - ROAMING
         - SMS_IN
         - SMS_IN_ROAM
