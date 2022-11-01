@@ -438,7 +438,7 @@ paths:
   /subscription/v2/msisdn/{msisdn}:
     get:
       tags:
-        - Subscription Profile v2 (Under development)
+        - Subscription Profile v2
       parameters:
         - name: msisdn
           in: path
@@ -451,7 +451,7 @@ paths:
       operationId: getSubscription.v2
       responses:
         '200':
-          description: successful operation
+          description: Successful operation
           content:
             application/json:
               schema:
@@ -463,8 +463,8 @@ paths:
   /provision/v2/activate:
     post:
       tags:
-        - Subscription Profile v2 (Under development)
-      summary: New user signs up
+        - Subscription Profile v2
+      summary: Create and activate new subscription
       operationId: activate.sim.v2
       requestBody:
         content:
@@ -479,10 +479,13 @@ paths:
               properties:
                 bssid:
                   type: string
+                  description: The bssid this subscription will be created for, must be equal to the bssid of the SIM that the ICCID belongs to
                 userid:
                   type: string
+                  description: An external reference ID for this subscription
                 iccid:
                   type: string
+                  description: The ICCID of the SIM that should be tied to this subscription
                 msisdn:
                   type: string
                 roamingprofile:
@@ -491,6 +494,7 @@ paths:
                   type: string
                 services:
                   type: object
+                  description: Services enable on this subscription, if null or empty, the default services for this tenant will be used
                   properties:
                     add:
                       type: array
@@ -498,6 +502,7 @@ paths:
                         $ref: '#/components/schemas/ServiceObject'
             example:
               bssid: "operator_name"
+              userid: "external_system_id_1234"
               iccid: "2420198416000015720"
               msisdn: "46737678218"
               roamingprofile: "roamingprofile1"
@@ -531,9 +536,9 @@ paths:
           content: {}
 
   /provision/v2/update:
-    put:
+    post:
       tags:
-        - Subscription Profile v2 (Under development)
+        - Subscription Profile v2
       summary: Update subscription
       operationId: updateSubscription.v2
       requestBody:
@@ -574,7 +579,7 @@ paths:
   /provision/v2/block:
     post:
       tags:
-        - Subscription Profile v2 (Under development)
+        - Subscription Profile v2
       summary: Block Subscription
       operationId: block.sim.v2
       requestBody:
@@ -614,7 +619,7 @@ paths:
   /provision/v2/changesim:
     post:
       tags:
-        - Subscription Profile v2 (Under development)
+        - Subscription Profile v2
       summary: Change SIM
       description: |
         Changing the SIM for a user. Only an unassigned ICCID can be provided as the new ICCID to this call.
@@ -655,7 +660,7 @@ paths:
   /provision/v2/disengagesim:
     post:
       tags:
-        - Subscription Profile v2 (Under development)
+        - Subscription Profile v2
       summary: Disengage SIM
       operationId: disengage.sim.v2
       requestBody:
@@ -693,7 +698,7 @@ paths:
   /provision/v2/changemsisdn:
     post:
       tags:
-        - Subscription Profile v2 (Under development)
+        - Subscription Profile v2
       summary: Change MSISDN
       operationId: change.msisdn.v2
       requestBody:
@@ -735,7 +740,7 @@ paths:
   /provision/v2/terminate:
     post:
       tags:
-        - Subscription Profile v2 (Under development)
+        - Subscription Profile v2
       summary: Terminate
       operationId: terminate.v2
       requestBody:
@@ -775,7 +780,7 @@ paths:
   /provision/v2/unblock:
     post:
       tags:
-        - Subscription Profile v2 (Under development)
+        - Subscription Profile v2
       summary: Unblock SIM
       operationId: unblock.sim.v2
       requestBody:
@@ -816,7 +821,7 @@ paths:
   /provision/v2/cancellocation:
     post:
       tags:
-        - Subscription Profile v2 (Under development)
+        - Subscription Profile v2
       summary: Cancel location
       description: Cancel all locations of a given subscriber. When using imsi or iccid as a parameter,
         all locations of the matching subscriber will be cancelled. In case the subscriber has multiple SIMs or or multiple IMSIs, this
@@ -1098,16 +1103,16 @@ components:
                 Configure service DATA_CONTENT_FILTERING by supplying a list of forbidden content.
             unconditional:
               type: string
-              description: Configure service VOICE_CALLFOWARD with the msisdn for unconditional forwarding.
+              description: Configure service VOICE_CALLFORWARD with the msisdn for unconditional forwarding.
             busy:
               type: string
-              description: Configure service VOICE_CALLFOWARD with the msisdn for forwarding when callee is busy.
+              description: Configure service VOICE_CALLFORWARD with the msisdn for forwarding when callee is busy.
             no_reply:
               type: string
-              description: Configure service VOICE_CALLFOWARD with the msisdn for forwarding when callee does not answer.
+              description: Configure service VOICE_CALLFORWARD with the msisdn for forwarding when callee does not answer.
             unreachable:
               type: string
-              description: Configure service VOICE_CALLFOWARD with the msisdn for forwarding when callee is not reachable.
+              description: Configure service VOICE_CALLFORWARD with the msisdn for forwarding when callee is not reachable.
     UpdateSubscriptionRequestV2:
       type: object
       required:
@@ -1116,6 +1121,7 @@ components:
         bssid:
           type: string
           example: "operator_name"
+          description: "Name of the tenant that the subscription belongs to"
         msisdn:
           type: string
           example: '4799990000'
