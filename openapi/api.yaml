@@ -13,6 +13,7 @@ externalDocs:
   url: 'https://docs.wgtwo.com'
 servers:
   - url: 'https://api.wgtwo.com'
+  - url: 'https://sandbox.api.wgtwo.com'
 tags:
   - name: Subscription Profile
     description: Provision services for subscribers
