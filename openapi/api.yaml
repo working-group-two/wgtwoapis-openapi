@@ -45,6 +45,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v1/activate:
     post:
@@ -89,6 +92,9 @@ paths:
         '404':
           description: Subscription or sim not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v1/block:
     post:
@@ -129,6 +135,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v1/changesim:
     post:
@@ -177,6 +186,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v1/disengagesim:
     post:
@@ -221,6 +233,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v1/changemsisdn:
     post:
@@ -266,6 +281,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v1/terminate:
     post:
@@ -306,6 +324,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v1/unblock:
     post:
@@ -346,6 +367,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v1/update:
     post:
@@ -399,6 +423,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v1/refreshprofile:
     post:
@@ -435,6 +462,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /subscription/v2/msisdn/{msisdn}:
     get:
@@ -460,6 +490,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v2/activate:
     post:
@@ -535,6 +568,9 @@ paths:
         '404':
           description: Subscription or sim not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v2/update:
     post:
@@ -576,6 +612,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v2/block:
     post:
@@ -616,6 +655,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v2/changesim:
     post:
@@ -657,6 +699,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v2/disengagesim:
     post:
@@ -695,6 +740,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v2/changemsisdn:
     post:
@@ -737,6 +785,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v2/terminate:
     post:
@@ -777,6 +828,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v2/unblock:
     post:
@@ -817,7 +871,9 @@ paths:
         '404':
           description: Subscription not found
           content: {}
-
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
 
   /provision/v2/cancellocation:
     post:
@@ -856,13 +912,109 @@ paths:
                 $ref: '#/components/schemas/UpdateSubscriptionResponse'
         '400':
           description: Invalid input
-          content: {}
+          content: { }
         '404':
           description: Subscription not found
-          content: {}
+          content: { }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
+
+  /sim/v0/import:
+    post:
+      tags:
+        - SIM Import v0
+      summary: Import SIMs to WG2 platform
+      operationId: sim.import.v0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - bssid
+                - iccid
+                - imsis
+                - ki
+              properties:
+                bssid:
+                  type: string
+                iccid:
+                  type: string
+                imsis:
+                  type: array
+                  items:
+                    type: string
+                ki:
+                  type: string
+                opc:
+                  type: string
+                pin1:
+                  type: string
+                puk1:
+                  type: string
+                pin2:
+                  type: string
+                puk2:
+                  type: string
+                adm:
+                  type: string
+            example:
+              bssid: "operator_name"
+              iccid: "89100423481445593695"
+              imsis: [ "310170845466094", "310170845466095" ]
+              ki: "000102030405060708090A0B0C0D0E0F"
+              pin1: "1234"
+              puk1: "12345678"
+              adm: "12345678"
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        '400':
+          description: Invalid input
+          content: { }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
+        '404':
+          description: Invalid bssid specified in request
+          content: { }
 
 components:
+  responses:
+    Unauthorized:
+      description: The client does not have valid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccessDenied'
+    Forbidden:
+      description: The client is not authorized to access this resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccessDenied'
+    RateLimitExceeded:
+      description: The client has exceeded the rate limit
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RateLimitExceeded'
+
   schemas:
+    AccessDenied:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "invalid or missing credentials"
+    RateLimitExceeded:
+      type: string
+      example: "Too Many Requests"
     UpdateSubscriptionRequest:
       type: object
       required:
@@ -920,6 +1072,11 @@ components:
         userid:
           type: string
     UpdateSubscriptionResponse:
+      type: object
+      properties:
+        requestid:
+          type: string
+    RequestResponse:
       type: object
       properties:
         requestid:
@@ -1234,3 +1391,4 @@ security:
   - OAuth2:
       - subscription.read
       - subscription.write
+      - sim.import.write
