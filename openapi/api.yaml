@@ -736,15 +736,35 @@ components:
             unconditional:
               type: string
               description: Configure service VOICE_CALLFORWARD with the msisdn for unconditional forwarding.
+            unconditional_active:
+              type: boolean
+              description: |
+                Sets the active state for unconditional, if not explicitly set, the state will default
+                to active if any number is set for unconditional.
             busy:
               type: string
               description: Configure service VOICE_CALLFORWARD with the msisdn for forwarding when callee is busy.
+            busy_active:
+              type: boolean
+              description: |
+                Sets the active state for busy, if not explicitly set, the state will default
+                to active if any number is set for busy.
             no_reply:
               type: string
               description: Configure service VOICE_CALLFORWARD with the msisdn for forwarding when callee does not answer.
+            no_reply_active:
+              type: boolean
+              description: |
+                Sets the active state for no_reply, if not explicitly set, the state will default
+                to active if any number is set for no_reply.
             unreachable:
               type: string
               description: Configure service VOICE_CALLFORWARD with the msisdn for forwarding when callee is not reachable.
+            unreachable_active:
+              type: boolean
+              description: |
+                Sets the active state for unreachable, if not explicitly set, the state will default
+                to active if any number is set for unreachable.
     UpdateSubscriptionRequestV2:
       type: object
       required:
