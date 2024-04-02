@@ -647,6 +647,8 @@ components:
               lastModified:
                 type: string
                 format: date-time
+              activeImsi:
+                type: string
         services:
           type: array
           items:
