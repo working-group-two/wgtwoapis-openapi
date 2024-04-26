@@ -846,6 +846,7 @@ components:
         - MMS_OUT_INTER_ROAM
         - PRODUCT_BUNDLING
         - ROAMING
+        - ROAMING_DATA
         - SMS_IN
         - SMS_IN_ROAM
         - SMS_OUT
@@ -869,6 +870,7 @@ components:
         - VOICE_OUT_ROAM
         - VOICE_OUT_INTER
         - VOICE_OUT_INTER_ROAM
+        - VOICE_PREMIUM
         - VOICE_PREMIUM_INFO
         - VOICE_PREMIUM_ENTERTAINMENT
         - VOICE_VOLTE
