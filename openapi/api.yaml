@@ -1,33 +1,33 @@
 openapi: 3.0.1
 info:
-  title: Working Group TWO
+  title: Core Network APIs
   description: |
-    # Introduction to the Working Group Two REST APIs
+    ## Introduction to the Core Network REST APIs
 
-    Welcome to the documentation for the Working Group Two REST APIs. This collection of APIs allows for the provisioning and management of subscriber services, handling various operations related to subscription profiles, SIM import, and more. The APIs are designed to be straightforward and intuitive, encapsulating complex telecommunications operations into simple API calls.
+    Welcome to the documentation for the Mobility Services REST APIs. This collection of APIs allows for the provisioning and management of subscriber services, handling various operations related to subscription profiles, SIM import, and more. The APIs are designed to be straightforward and intuitive, encapsulating complex telecommunications operations into simple API calls.
 
-    ## Overview
+    ### Overview
 
     The APIs are grouped into two main categories:
 
     1. **Subscription Profile And Provisioning**: This set of APIs covers a broad range of functionalities related to subscriber profiles. Through these APIs, you can retrieve information about a subscription, activate a new subscription, update existing subscriptions, change SIMs, block or unblock SIMs, change MSISDN, terminate subscriptions, and more. It supports a variety of parameters and configurations allowing for a flexible management of subscriber services.
 
-    2. **SIM Import (BETA)**: This API facilitates the import of SIMs to the WG2 platform. It provides the ability to specify essential SIM attributes like BSSID, ICCID, IMSIs, and cryptographic keys for provisioning SIMs. Please note that this SIM import API is not stable and is subject to change.
+    2. **SIM Import (BETA)**: This API facilitates the import of SIMs to the Mobility Services platform. It provides the ability to specify essential SIM attributes like BSSID, ICCID, IMSIs, and cryptographic keys for provisioning SIMs. Please note that this SIM import API is not stable and is subject to change.
 
-    ## Authentication and Authorization
+    ### Authentication and Authorization
 
     The APIs support OAuth2 Client Credentials flow for authentication, where clients can obtain a token from the specified token URL. Different scopes are defined for reading and writing subscription information, as well as importing SIM data.
 
-    ## Error Handling
+    ### Error Handling
 
     Standard HTTP status codes are used to indicate the success or failure of an API request. Specific error schemas are defined to provide more information about the error, including a description of the error and additional details if applicable.
 
-    ## Rate Limiting
+    ### Rate Limiting
 
     The APIs have built-in rate limiting to ensure fair usage and to protect the system from abuse. Responses include standard headers to indicate the current rate limit status.
 
   contact:
-    email: wgtwo@wgtwo.com
+    email: mobility-services-developer@cisco.com
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
@@ -37,9 +37,11 @@ externalDocs:
   url: 'https://docs.wgtwo.com'
 servers:
   - url: 'https://sandbox.api.wgtwo.com'
-  - url: 'https://api.wgtwo.com'
+  - url: 'https://api.shamrock.wgtwo.com'
+  - url: 'https://api.oak.wgtwo.com'
+  - url: 'https://api.sakura.wgtwo.com'
 tags:
-  - name: Subscription Profile
+  - name: Subscription Profile v2
     description: Provision services for subscribers
     externalDocs:
       description: Find out more
@@ -69,6 +71,33 @@ paths:
         '404':
           description: Subscription not found
           content: {}
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimitExceeded' }
+  /subscription/v2/imsi/{imsi}:
+    get:
+      tags:
+        - Subscription Profile v2
+      parameters:
+        - name: imsi
+          in: path
+          description: IMSI associated with the SIM of the subscription
+          required: true
+          schema:
+            type: string
+            example: 313460000000001
+      summary: Get information about subscription
+      operationId: getSubscriptionByImsi.v2
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionV2'
+        '404':
+          description: Subscription not found
+          content: { }
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { $ref: '#/components/responses/Forbidden' }
         '429': { $ref: '#/components/responses/RateLimitExceeded' }
@@ -507,11 +536,12 @@ paths:
     post:
       tags:
         - SIM Import v0
-      summary: Import SIMs to WG2 platform (Beta)
+      summary: Import SIMs to Mobility Services platform (Beta)
       description: |
-        Import SIMs to the WG2 platform. This API is currently in beta and is subject to change.
-        When no *opc* value is provided, the API will use the preconfigured *OP* value associated
-        with the provided *identifierkey*.
+        Import SIMs to the Mobility Services platform. This API is currently in beta and is subject to change.
+        When no *opc* value is provided, the API will use the preconfigured *OP* value associated with the
+        provided *identifierkey*.
+
         Contact us to enable this feature for your tenant.
       operationId: sim.import.v0
       requestBody:
@@ -889,7 +919,7 @@ components:
     operatorKey:
       type: http
       scheme: basic
-      description: API key provided by Working Group Two
+      description: API key provided by Cisco
 security:
   - operatorKey: []
   - OAuth2:
