@@ -16,7 +16,7 @@
 
     <properties>
         <maven.deploy.skip>false</maven.deploy.skip>
-        <okhttp.version>4.9.1</okhttp.version>
+        <okhttp.version>4.9.2</okhttp.version>
     </properties>
 
     <dependencies>
