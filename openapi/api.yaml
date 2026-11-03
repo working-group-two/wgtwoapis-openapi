@@ -1,3 +1,5 @@
+# Copyright (C) 2021 Cisco Systems, Inc.
+
 openapi: 3.0.1
 info:
   title: Core Network APIs
@@ -33,19 +35,17 @@ info:
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
   version: 1.0.0
 externalDocs:
-  description: See docs.wgtwo.com
-  url: 'https://docs.wgtwo.com'
+  description: See docs.mobility.cisco.com
+  url: 'https://docs.mobility.cisco.com'
 servers:
   - url: 'https://sandbox.api.wgtwo.com'
   - url: 'https://api.shamrock.wgtwo.com'
-  - url: 'https://api.oak.wgtwo.com'
-  - url: 'https://api.sakura.wgtwo.com'
 tags:
   - name: Subscription Profile v2
     description: Provision services for subscribers
     externalDocs:
       description: Find out more
-      url: 'https://docs.wgtwo.com'
+      url: 'https://docs.mobility.cisco.com'
 paths:
   /subscription/v2/msisdn/{msisdn}:
     get:
@@ -907,6 +907,8 @@ components:
         - VOICE_VOLTE
         - VOICE_VOWIFI
         - VOICEMAIL_DISABLE_NOTIFICATION
+        - SS_ACCESS_BARRED
+        - SMS_IN_MME
   securitySchemes:
     OAuth2:
       type: oauth2
